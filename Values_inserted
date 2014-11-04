@@ -257,7 +257,7 @@ INSERT INTO favorite(favoriteId, user_userId, remix_remixId) VALUES
 -- Table `mydb`.`payment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`payment` (
-  `paymentId` INT NOT NULL ,
+  `paymentId` INT NOT NULL AUTO_INCREMENT,
   `amount` VARCHAR(45) NULL,
   `datetime` DATETIME NULL,
   `payd` TINYINT(1) NULL,
