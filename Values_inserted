@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS genre;
 DROP TABLE IF EXISTS remix;
 DROP TABLE IF EXISTS rank;
 DROP TABLE IF EXISTS favorite;
+DROP TABLE IF EXISTS payment;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`user`
@@ -65,7 +66,7 @@ INSERT INTO artist (artistId, name, sirname, bio) VALUES
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`originalSong` (
   `originalSongId` INT NOT NULL AUTO_INCREMENT,
-  `genre` VARCHAR(45) NOT NULL,
+  `genre_genreId` INT NOT NULL,
   `artist` VARCHAR(45) NULL,
   `songName` VARCHAR(45) NULL,
   `label` VARCHAR(45) NULL,
@@ -79,13 +80,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`originalSong` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO originalSong ( originalSongId, genre, artist, songName, label, artist_artistId) VALUES
-(1, 'House', 'Martin Garrix', 'Animals', 'Spinning Records', 1),
-(2, 'House', 'Dj Tiësto', 'Wasted', 'Musical Freedom', 4),
-(3, 'House', 'Hardwell', 'Young Again', 'Revealed', 2),
-(4, 'House', 'Showtek', 'Cannonball', 'Spinning Records', 6),
-(5, 'House', 'Martin Garrix', 'Virus', 'Spinning Records', 1),
-(6, 'House', 'Hardwell', 'Arcadia', 'Revealed', 2)
+INSERT INTO originalSong ( originalSongId, genre_genreId, artist, songName, label, artist_artistId) VALUES
+(1, 1, 'Martin Garrix', 'Animals', 'Spinning Records', 1),
+(2, 1, 'Dj Tiësto', 'Wasted', 'Musical Freedom', 4),
+(3, 1, 'Hardwell', 'Young Again', 'Revealed', 2),
+(4, 1, 'Showtek', 'Cannonball', 'Spinning Records', 6),
+(5, 1, 'Martin Garrix', 'Virus', 'Spinning Records', 1),
+(6, 1, 'Hardwell', 'Arcadia', 'Revealed', 2)
 ;
 
 -- -----------------------------------------------------
@@ -256,7 +257,7 @@ INSERT INTO favorite(favoriteId, user_userId, remix_remixId) VALUES
 -- Table `mydb`.`payment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`payment` (
-  `paymentId` INT NOT NULL AUTO_INCREMENT,
+  `paymentId` INT NOT NULL ,
   `amount` VARCHAR(45) NULL,
   `datetime` DATETIME NULL,
   `payd` TINYINT(1) NULL,
@@ -271,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`payment` (
 ENGINE = InnoDB;
 
 INSERT INTO payment(paymentId, amount, datetime, payd, user_userId) VALUES
-(1, '€40,-' , '2014-1-1' , 1, 1),
+(1, '€40,-' , '2014-1-1' , 0, 1),
 (2, '€100,-', '2014-5-25', 1, 2),
 (3, '€5,-', '2014-2-13', 1, 3),
 (4, '€0,70', '2014-9-2', 0, 4),
@@ -304,5 +305,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
